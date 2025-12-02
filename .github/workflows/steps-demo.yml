@@ -1,0 +1,40 @@
+name: Steps Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    env:
+      COURSE_STUDENT: "Abhishekh"
+
+    steps:
+
+      # 1. Use a marketplace action
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Run some shell commands
+      - name: Print a welcome
+        run: |
+          echo "Welcome $COURSE_STUDENT!"
+          echo "You're learning GitHub Actions like a pro."
+
+      # 3. Use another action (setup Node environment)
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 4. Use environment variable only for this step
+      - name: Env in step
+        env:
+          FAV_FOOD: biryani
+        run: echo "Abhi's fav food: $FAV_FOOD"
+
+      # 5. Conditional execution
+      - name: Run only if manual trigger
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: echo "This workflow was manually triggered!"
