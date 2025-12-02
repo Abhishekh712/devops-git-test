@@ -1,0 +1,17 @@
+name: Multi Job Demo
+
+on:
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start Job 1
+        run: echo "This is JOB 1 running on its own VM"
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start Job 2
+        run: echo "This is JOB 2 running on its own VM"
